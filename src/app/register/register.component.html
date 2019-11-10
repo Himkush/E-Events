@@ -1,0 +1,83 @@
+<div class="container text-white">
+  <div class="row shift-center">
+    <h2 class="">REGISTER</h2>
+    <div class="custom-radio">
+      <label><input type="radio" name="role">Candidate</label>
+    </div>
+    <div class="custom-radio">
+      <label><input type="radio" name="role">Coordinator</label>
+    </div>
+  </div>
+  <form formGroup="registerForm" class="pt-4">
+    <div class="row">
+      <div class="col-md-6 border-right">
+        <div class="image-holder">
+          <div class="image-container" [ngStyle]="{'background-image': 'url('+imageUrl+')'}">
+          </div>
+          <input type="file" (change)="showPreview($event)">
+        </div>
+        <div class="">
+          <label for="name" class="col-form-label">First Name</label>
+          <input type="text" class="form-control" id="name" name="name" placeholder="First Name">
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="lname" class="col-form-label">Last Name</label>
+          <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name">
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="rollno" class="col-form-label">Roll Number</label>
+          <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Roll Number">
+          <!--<span>* Name is required</span>-->
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="">
+          <label for="email" class="col-form-label">Email Id</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="mobile" class="col-form-label">Mobile Number</label>
+          <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number">
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="department" class="col-form-label">Department</label>
+          <select type="text" class="form-control" id="department" name="department">
+            <option>CSE</option>
+            <option>EN</option>
+            <option>ECE</option>
+            <option>IT</option>
+            <option>CE</option>
+            <option>ME</option>
+            <option>BT</option>
+          </select>
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="year" class="col-form-label">Year</label>
+          <select type="text" class="form-control" id="year" name="year">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+          </select>
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="password" class="col-form-label">Set Password</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+          <!--<span>* Name is required</span>-->
+        </div>
+        <div class="">
+          <label for="cpassword" class="col-form-label">Confirm Password</label>
+          <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password">
+          <!--<span>* Name is required</span>-->
+        </div>
+        <button type="submit" class="btn btn-outline-light mt-4 ">Register</button>
+      </div>
+    </div>
+  </form>
+</div>
