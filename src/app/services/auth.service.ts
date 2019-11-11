@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, AngularFirestoreDocument} from '@angular/fire/firestore';
 import {Router} from '@angular/router';
 import {UserModel} from '../models/user.model';
 import {BehaviorSubject} from 'rxjs';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class AuthService {
 
   // private eventAuthError = new BehaviorSubject<string>('');
   // eventAuthError$ = this.eventAuthError.asObservable();
+  currentUser: AngularFirestoreDocument<UserModel>;
   newUser: UserModel;
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
+              private afs: AngularFirestore,
               private router: Router) { }
 
   createUser(user: UserModel) {
@@ -59,15 +62,26 @@ export class AuthService {
         alert('Login Successful!!!');
         this.router.navigate(['event-form']);
       })
-    .catch( (error) => {
-      alert(error);
-    });
+      .catch( (error) => {
+        alert(error);
+      });
   }
   getUserState() {
     return this.afAuth.authState;
   }
   getCurrentUserDetails() {
-
+    const uid = this.afAuth.auth.currentUser.uid;
+    this.currentUser = this.db.doc<UserModel>(`Users/${uid}`);
+    console.log(uid);
+    console.log(this.currentUser);
+    return this.currentUser.valueChanges();
+  }
+  updateUser(userDetails: UserModel) {
+    const uid = this.afAuth.auth.currentUser.uid;
+    this.currentUser = this.db.doc<UserModel>(`Users/${uid}`);
+    this.currentUser.update(userDetails)
+      .then( () => alert('Edit Successful'))
+      .catch((err) => alert(err));
   }
   logout() {
     return this.afAuth.auth.signOut();

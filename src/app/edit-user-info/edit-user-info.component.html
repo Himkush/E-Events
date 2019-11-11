@@ -1,10 +1,10 @@
-<div class="container text-white">
+<div class="container">
+
   <div class="row shift-center">
-    <h2 class="">REGISTER</h2>
+    <h2 class="">EDIT INFO</h2>
   </div>
 
-  <form (ngSubmit)="addUser()" [formGroup]="registerForm" class="pt-4">
-
+  <form [formGroup]="editForm" (ngSubmit)="editUser()" class="pt-4">
     <div class="row shift-center pb-4">
       <div class="custom-control custom-radio mr-md-4">
         <input class="custom-control-input" id="candidateradio" type="radio" value="candidate" formControlName="role">
@@ -14,9 +14,6 @@
         <input class="custom-control-input" id="coordinatorradio" type="radio" value="coordinator" formControlName="role">
         <label class="custom-control-label" for="coordinatorradio">Coordinator</label>
       </div>
-    </div>
-    <div *ngIf="registerForm.get('role').invalid && formSubmitted" class="alert alert-danger" role="alert">
-      Please Choose Your Role!!
     </div>
 
     <div class="row">
@@ -29,29 +26,24 @@
         <div class="">
           <label for="name" class="col-form-label">First Name</label>
           <input type="text" class="form-control" id="name" name="name" placeholder="First Name" formControlName="firstName">
-          <!--<span>* Name is required</span>-->
         </div>
         <div class="">
           <label for="lname" class="col-form-label">Last Name</label>
           <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name" formControlName="lastName">
-          <!--<span>* Name is required</span>-->
-        </div>
-        <div class="">
-          <label for="rollno" class="col-form-label">Roll Number</label>
-          <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Roll Number" formControlName="rollNumber">
-          <!--<span>* Name is required</span>-->
         </div>
       </div>
       <div class="col-md-6">
         <div class="">
+          <label for="rollno" class="col-form-label">Roll Number</label>
+          <input type="text" class="form-control" id="rollno" name="rollno" placeholder="Roll Number" formControlName="rollNumber">
+        </div>
+        <div class="">
           <label for="email" class="col-form-label">Email Id</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Email" formControlName="email">
-          <!--<span>* Name is required</span>-->
+          <input type="email" class="form-control" id="email" name="email" placeholder="Email" formControlName="email" [disabled]="true">
         </div>
         <div class="">
           <label for="mobile" class="col-form-label">Mobile Number</label>
           <input type="text" class="form-control" id="mobile" name="mobile" placeholder="Mobile Number" formControlName="mobile">
-          <!--<span>* Name is required</span>-->
         </div>
         <div class="">
           <label for="department" class="col-form-label">Department</label>
@@ -64,7 +56,6 @@
             <option value="ME">ME</option>
             <option value="BT">BT</option>
           </select>
-          <!--<span>* Name is required</span>-->
         </div>
         <div class="">
           <label for="year" class="col-form-label">Year</label>
@@ -74,28 +65,11 @@
             <option value="3">3</option>
             <option value="4">4</option>
           </select>
-          <!--<span>* Name is required</span>-->
         </div>
         <div class="">
-          <label for="password" class="col-form-label">Set Password</label>
-          <input type="password" class="form-control" id="password" name="password" placeholder="Password" formControlName="password">
-          <!--<span>* Name is required</span>-->
-          <div *ngIf="registerForm.get('password').invalid && registerForm.get('password').touched" class="alert alert-danger" role="alert">
-            Password should be 8 characters long!!!
-          </div>
+          <button type="submit" class="btn btn-outline-dark mt-4" (click)="editUser()">Confirm Edit</button>
         </div>
-        <div class="">
-          <label for="copassword" class="col-form-label">Confirm Password</label>
-          <input type="password" class="form-control" id="copassword" placeholder="Confirm Password" formControlName="cpassword">
-          <!--<span>* Name is required</span>-->
-          <div *ngIf="(registerForm.get('password').value!==registerForm.get('cpassword').value)" class="alert alert-danger" role="alert">
-            Password does'nt match!!!
-          </div>
-        </div>
-      </div>
 
-      <div class="row shift-center">
-        <button type="submit" class="btn btn-outline-light mt-4">Register</button>
       </div>
 
     </div>

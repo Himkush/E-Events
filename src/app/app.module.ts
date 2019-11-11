@@ -5,7 +5,7 @@ import { NgModule } from '@angular/core';
 import {AngularFireModule} from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TimepickerModule, BsDatepickerModule, TabsModule } from 'ngx-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularFirestore } from '@angular/fire/firestore';
@@ -23,6 +23,12 @@ import { EventComponent } from './event/event.component';
 import { EventsComponent } from './events/events.component';
 import { EventDetailComponent } from './event-detail/event-detail.component';
 import { ParticipationListService } from './shared/service/participation.service';
+import { LoginComponent } from './login/login.component';
+import {RegisterComponent} from './register/register.component';
+import {AuthService} from './services/auth.service';
+import {RegisterService} from './services/register.service';
+import {AngularFireAuthModule} from '@angular/fire/auth';
+import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +40,10 @@ import { ParticipationListService } from './shared/service/participation.service
     EventCardComponent,
     EventComponent,
     EventsComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    LoginComponent,
+    RegisterComponent,
+    EditUserInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -43,12 +52,14 @@ import { ParticipationListService } from './shared/service/participation.service
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
     AngularFireDatabaseModule,
+    AngularFireAuthModule,
     ReactiveFormsModule,
+    FormsModule,
     BsDatepickerModule.forRoot(),
     TimepickerModule.forRoot(),
     TabsModule.forRoot()
   ],
-  providers: [EventFormService, AngularFirestore, ParticipationListService, EventBusService],
+  providers: [EventFormService, AngularFirestore, ParticipationListService, EventBusService, AuthService, RegisterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

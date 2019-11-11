@@ -8,7 +8,7 @@ html {
   box-sizing: inherit;
 }
 body {
-  padding-top: 60px;
+  /*padding-top: 60px;*/
 }
 .nav-tabs{
   margin-bottom: 15px !important;
@@ -21,6 +21,23 @@ body {
   font-weight: bold;
   font-size: 1.3rem;
   /* color: #485472; */
+}
+
+body {
+  background: url("assets/img/background.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.shift-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
+  border: 2px solid red;
 }
 
 .loader {

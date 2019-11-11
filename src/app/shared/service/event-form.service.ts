@@ -32,7 +32,7 @@ export class EventFormService {
         });
       });
   }
-  updateEvent(data, id: string){
+  updateEvent(data, id: string) {
     this.itemDoc = this.db.doc<FormsModel>(`eventForm/${id}`);
     this.itemDoc.update(data).
         then(() => {}).
