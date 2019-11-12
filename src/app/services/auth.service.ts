@@ -14,9 +14,9 @@ export class AuthService {
   // eventAuthError$ = this.eventAuthError.asObservable();
   currentUser: AngularFirestoreDocument<UserModel>;
   newUser: UserModel;
+  token: string;
   constructor(private afAuth: AngularFireAuth,
               private db: AngularFirestore,
-              private afs: AngularFirestore,
               private router: Router) { }
 
   createUser(user: UserModel) {
@@ -37,8 +37,9 @@ export class AuthService {
       });
   }
   insertUSerData(userCredential: firebase.auth.UserCredential) {
-    if (this.newUser.imageSrc === undefined) {
-      this.newUser.imageSrc = 'gs://e-events-3964d.appspot.com/userImages/aavatar2.png';
+    if (this.newUser.imageSrc === null || this.newUser.imageSrc === '') {
+      this.newUser.imageSrc = 'https://firebasestorage.googleapis.com/v0/b/e-events-3964d.appspot.com' +
+        '/o/userImages%2Faavatar2.png?alt=media&token=9eafa8c5-2232-4f80-8eb2-b210cf747ff0';
     }
     const today = new Date();
     const date = today.getDate() + '-' + (today.getMonth() + 1) + '-' + today.getFullYear();
@@ -59,8 +60,12 @@ export class AuthService {
   login(email: string, password: string) {
     this.afAuth.auth.signInWithEmailAndPassword(email, password)
       .then(() => {
-        alert('Login Successful!!!');
-        this.router.navigate(['event-form']);
+        this.afAuth.auth.currentUser.getIdToken()
+          .then((token: string) => {
+            this.token = token;
+            this.router.navigate(['event-form']);
+          })
+          .catch((error) => console.log(error));
       })
       .catch( (error) => {
         alert(error);
@@ -69,15 +74,21 @@ export class AuthService {
   getUserState() {
     return this.afAuth.authState;
   }
+  isToken() {
+    return this.token != null;
+  }
+  getCurrentUserUid() {
+    return this.afAuth.auth.currentUser.uid;
+  }
   getCurrentUserDetails() {
-    const uid = this.afAuth.auth.currentUser.uid;
+    const uid = this.getCurrentUserUid();
     this.currentUser = this.db.doc<UserModel>(`Users/${uid}`);
     console.log(uid);
     console.log(this.currentUser);
     return this.currentUser.valueChanges();
   }
   updateUser(userDetails: UserModel) {
-    const uid = this.afAuth.auth.currentUser.uid;
+    const uid = this.getCurrentUserUid();
     this.currentUser = this.db.doc<UserModel>(`Users/${uid}`);
     this.currentUser.update(userDetails)
       .then( () => alert('Edit Successful'))

@@ -21,17 +21,17 @@ export class EditUserInfoComponent implements OnInit {
   ngOnInit() {
     this.auth.getCurrentUserDetails().subscribe(result => {
       this.user = result;
-    });
-    this.editForm = new FormGroup({
-      firstName: new FormControl(this.user.firstName, Validators.required),
-      lastName: new FormControl(this.user.lastName, Validators.required),
-      rollNumber: new FormControl(this.user.rollNumber, Validators.required),
-      year: new FormControl(this.user.year, Validators.required),
-      email: new FormControl(this.user.email),
-      mobile: new FormControl(this.user.mobile, Validators.required),
-      department: new FormControl(this.user.department, Validators.required),
-      role: new FormControl(this.user.role, Validators.required),
-      imgSrc: new FormControl(this.user.imageSrc),
+      this.editForm = new FormGroup({
+        firstName: new FormControl(this.user.firstName, Validators.required),
+        lastName: new FormControl(this.user.lastName, Validators.required),
+        rollNumber: new FormControl(this.user.rollNumber, Validators.required),
+        year: new FormControl(this.user.year, Validators.required),
+        email: new FormControl(this.user.email),
+        mobile: new FormControl(this.user.mobile, Validators.required),
+        department: new FormControl(this.user.department, Validators.required),
+        role: new FormControl(this.user.role, Validators.required),
+        imgSrc: new FormControl(this.user.imageSrc),
+      });
     });
   }
   editUser() {

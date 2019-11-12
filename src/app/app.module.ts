@@ -29,6 +29,7 @@ import {AuthService} from './services/auth.service';
 import {RegisterService} from './services/register.service';
 import {AngularFireAuthModule} from '@angular/fire/auth';
 import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component';
+import {AuthGuard} from './shared/guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,10 @@ import { EditUserInfoComponent } from './edit-user-info/edit-user-info.component
     TimepickerModule.forRoot(),
     TabsModule.forRoot()
   ],
-  providers: [EventFormService, AngularFirestore, ParticipationListService, EventBusService, AuthService, RegisterService],
+  providers: [EventFormService, AngularFirestore, ParticipationListService,
+    EventBusService, AuthService, RegisterService,
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -3,15 +3,17 @@ import { AngularFirestore, AngularFirestoreCollection} from '@angular/fire/fires
 import {Observable} from 'rxjs';
 import {UserModel} from '../models/user.model';
 import {AngularFireStorage} from '@angular/fire/storage';
+import {AuthService} from './auth.service';
 
 @Injectable()
 export class RegisterService {
   usersCollection: AngularFirestoreCollection<UserModel>;
   users: Observable<UserModel[]>;
-  constructor(public afs: AngularFirestore,
-              private storage: AngularFireStorage) {
+  constructor(public db: AngularFirestore,
+              private storage: AngularFireStorage,
+              private auth: AuthService) {
     // this.users = this.afs.collection('users').valueChanges();
-    this.usersCollection = this.afs.collection('users');
+    this.usersCollection = this.db.collection('users');
     // this.users = this.usersCollection.snapshotChanges().pipe(map(changes => {
     //   return changes.map(a => {
     //     const data = a.payload.doc.data();
@@ -20,11 +22,12 @@ export class RegisterService {
     //   });
     // }));
   }
-  uploadUserImage(filePath: string, image: any) {
+  uploadUserImage(filePath: string, image: any, callback) {
     const fileRef = this.storage.ref(filePath);
     this.storage.upload(filePath, image)
       .then(result => {
         fileRef.getDownloadURL().subscribe(url => {
+          callback(url);
         });
       })
       .catch(error => {

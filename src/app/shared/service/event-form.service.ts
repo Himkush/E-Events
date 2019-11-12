@@ -64,7 +64,7 @@ export class EventFormService {
     );
     return this.events;
   }
-  getEventDetail(id?: string){
+  getEventDetail(id?: string) {
     this.itemDoc = this.db.doc<FormsModel>(`eventForm/${id}`);
     return this.itemDoc.valueChanges();
   }

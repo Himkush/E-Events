@@ -1,14 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 @import url(https://fonts.googleapis.com/css?family=Sigmar+One);
-html {
-  box-sizing: border-box;
-}
 
 *, *:before, *:after {
   box-sizing: inherit;
-}
-body {
-  /*padding-top: 60px;*/
 }
 .nav-tabs{
   margin-bottom: 15px !important;
@@ -22,14 +16,31 @@ body {
   font-size: 1.3rem;
   /* color: #485472; */
 }
-
-body {
-  background: url("assets/img/background.jpg") no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-}
+/*body {*/
+  /*background: url("assets/img/background.jpg") no-repeat center center fixed;*/
+  /*-webkit-background-size: cover;*/
+  /*-moz-background-size: cover;*/
+  /*-o-background-size: cover;*/
+  /*background-size: cover;*/
+/*}*/
+/*#bg {*/
+  /*position: fixed;*/
+  /*z-index: -2;*/
+  /*top: -50%;*/
+  /*left: -50%;*/
+  /*width: 200%;*/
+  /*height: 200%;*/
+/*}*/
+/*#bg img {*/
+  /*position: absolute;*/
+  /*top: 0;*/
+  /*left: 0;*/
+  /*right: 0;*/
+  /*bottom: 0;*/
+  /*margin: auto;*/
+  /*min-width: 50%;*/
+  /*min-height: 50%;*/
+/*}*/
 .shift-center {
   display: flex;
   flex-direction: row;

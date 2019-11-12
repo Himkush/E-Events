@@ -11,7 +11,7 @@ import {AuthService} from '../services/auth.service';
 export class RegisterComponent implements OnInit {
   selectedImage: any = null;
   editState = false;
-  registerForm: any;
+  registerForm: FormGroup;
   imageUrl: string;
   formSubmitted = false;
   // @ViewChild('')
@@ -29,21 +29,27 @@ export class RegisterComponent implements OnInit {
       email: new FormControl(null, Validators.required),
       department: new FormControl(null, Validators.required),
       role: new FormControl(null, Validators.required),
-      imgSrc: new FormControl(''),
+      imageSrc: new FormControl(''),
       password: new FormControl(null, [Validators.required, Validators.minLength(8)]),
       cpassword: new FormControl(null, Validators.required)
     });
   }
+  some = (url) => {
+    this.registerForm.get('imageSrc').setValue(url);
+    this.auth.createUser(this.registerForm.value);
+  }
   addUser() {
     if (this.registerForm.valid) {
       // this.registerService.addUser(this.user);
-      this.auth.createUser(this.registerForm.value);
       if (this.selectedImage) {
         const filePath = `userImages/${this.selectedImage.name.split('.').slice(0, -1).join('.')}_${new Date().getTime()}`;
-        this.registerService.uploadUserImage(filePath, this.selectedImage);
+        this.registerService.uploadUserImage(filePath, this.selectedImage, this.some.bind(this));
+      } else {
+        this.auth.createUser(this.registerForm.value);
       }
     } else {
       this.formSubmitted = true;
+      alert('asfasf');
     }
   }
   showPreview(event: any) {
